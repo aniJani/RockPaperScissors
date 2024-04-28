@@ -11,10 +11,15 @@ public partial class Statistics : ContentPage
     {
         InitializeComponent();
         _database = new LocalDB();
-        LoadStatisticsAsync();
     }
 
-    private async void LoadStatisticsAsync()
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await LoadStatisticsAsync();
+    }
+
+    private async Task LoadStatisticsAsync()
     {
         _stats = await _database.GetStatisticsAsync() ?? new Model.Statistics();
         UpdateUI();
