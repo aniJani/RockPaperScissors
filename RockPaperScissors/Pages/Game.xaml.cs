@@ -1,15 +1,29 @@
 ﻿using System;
 using Microsoft.Maui.Controls;
+using RockPaperScissors.Database;
+using RockPaperScissors.Model;
 
 namespace RockPaperScissors.Pages;
-
 public partial class Game : ContentPage
 {
-    private static readonly Random random = new Random();  // Random is now static to avoid re-seeding issues.
+    private static readonly Random random = new Random();
+    private readonly LocalDB _database;
+    private Model.Statistics _currentStats;
 
     public Game()
     {
         InitializeComponent();
+        _database = new LocalDB();
+        LoadStatistics();
+    }
+
+    private async void LoadStatistics()
+    {
+        _currentStats = await _database.GetStatisticsAsync();
+        if (_currentStats == null)
+        {
+            _currentStats = new Model.Statistics();
+        }
     }
 
     private void OnButtonClicked(object sender, EventArgs e)
@@ -20,8 +34,32 @@ public partial class Game : ContentPage
             string computerChoice = GetComputerChoice();
             string result = DetermineWinner(playerChoice, computerChoice);
             DisplayResult(result, playerChoice, computerChoice);
-            DisableChoiceButtons(); // Call this method to disable the buttons
+            UpdateStatistics(playerChoice, result);
+            DisableChoiceButtons();
         }
+    }
+
+    private void UpdateStatistics(string playerChoice, string result)
+    {
+        _currentStats.TotalGamesPlayed++;
+        switch (playerChoice)
+        {
+            case "Rock":
+                _currentStats.PlayerChoseRock++;
+                break;
+            case "Paper":
+                _currentStats.PlayerChosePaper++;
+                break;
+            case "Scissors":
+                _currentStats.PlayerChoseScissors++;
+                break;
+        }
+        if (result == "You win!")
+            _currentStats.PlayerWins++;
+        else if (result == "You lose!")
+            _currentStats.AIWins++;
+
+        Task.Run(async () => await _database.UpdateStatisticsAsync(_currentStats));
     }
 
     private void DisableChoiceButtons()
@@ -41,14 +79,12 @@ public partial class Game : ContentPage
     private string DetermineWinner(string player, string computer)
     {
         if (player == computer) return "It's a draw!";
-
         if ((player == "Rock" && computer == "Scissors") ||
             (player == "Paper" && computer == "Rock") ||
             (player == "Scissors" && computer == "Paper"))
         {
             return "You win!";
         }
-
         return "You lose!";
     }
 
@@ -63,26 +99,22 @@ public partial class Game : ContentPage
     {
         return choice switch
         {
-            "Rock" => "🪨",  // Emoji for Rock
-            "Paper" => "📄", // Emoji for Paper
-            "Scissors" => "✂️", // Emoji for Scissors
+            "Rock" => "🪨",
+            "Paper" => "📄",
+            "Scissors" => "✂️",
             _ => string.Empty
         };
     }
 
-
     private void OnNextRoundClicked(object sender, EventArgs e)
     {
-        // Re-enable the buttons for the next round
         ScissorsButton.IsEnabled = true;
         RockButton.IsEnabled = true;
         PaperButton.IsEnabled = true;
-
         PlayerChoiceLabel.Text = string.Empty;
         ComputerChoiceLabel.Text = string.Empty;
         ResultLabel.Text = string.Empty;
     }
-
 
     async void OnExitClicked(object sender, EventArgs e)
     {

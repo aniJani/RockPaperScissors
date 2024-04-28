@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RockPaperScissors.Pages.Game"
-             Title="Rock Paper Scissors">
+             Title="Rock Paper Scissors"
+             BackgroundColor="Black">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -10,26 +11,26 @@
         </Grid.RowDefinitions>
 
         <VerticalStackLayout Grid.Row="0" Spacing="20" HorizontalOptions="Center" VerticalOptions="Center">
-            <Label x:Name="ResultLabel" FontSize="24" HorizontalOptions="Center" />
+            <Label x:Name="ResultLabel" FontSize="24" HorizontalOptions="Center" TextColor="White"/>
             <StackLayout Orientation="Horizontal" Spacing="20" HorizontalOptions="Center">
                 <VerticalStackLayout>
-                    <Label Text="Player's Pick" FontAttributes="Bold" HorizontalTextAlignment="Center" />
-                    <Label x:Name="PlayerChoiceLabel" FontSize="48" />
+                    <Label Text="Player's Pick" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="White" />
+                    <Label x:Name="PlayerChoiceLabel" FontSize="48"  />
                 </VerticalStackLayout>
-                <Label Text="VS" FontSize="48" VerticalOptions="Center" />
+                <Label Text="VS" FontSize="48" VerticalOptions="Center" TextColor="White"/>
                 <VerticalStackLayout>
-                    <Label Text="Computer's Pick" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+                    <Label Text="Computer's Pick" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="White"/>
                     <Label x:Name="ComputerChoiceLabel" FontSize="48" />
                 </VerticalStackLayout>
             </StackLayout>
         </VerticalStackLayout>
 
         <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="Center" Spacing="20" Padding="20">
-            <Button x:Name="ScissorsButton" Text="✌️" FontSize="24" Clicked="OnButtonClicked" ClassId="Scissors" />
-            <Button x:Name="RockButton" Text="✊" FontSize="24" Clicked="OnButtonClicked" ClassId="Rock" />
-            <Button x:Name="PaperButton" Text="✋" FontSize="24" Clicked="OnButtonClicked" ClassId="Paper" />
-            <Button Text="Next Round" Clicked="OnNextRoundClicked" />
-            <Button Text="Exit" Clicked="OnExitClicked" />
+            <Button x:Name="ScissorsButton" Text="✌️" FontSize="24" Clicked="OnButtonClicked" ClassId="Scissors" BackgroundColor="#00C5C8"/>
+            <Button x:Name="RockButton" Text="✊" FontSize="24" Clicked="OnButtonClicked" ClassId="Rock" BackgroundColor="#00C5C8"/>
+            <Button x:Name="PaperButton" Text="✋" FontSize="24" Clicked="OnButtonClicked" ClassId="Paper" BackgroundColor="#00C5C8"/>
+            <Button Text="Next Round" Clicked="OnNextRoundClicked" BackgroundColor="#00C5C8"/>
+            <Button Text="Exit" Clicked="OnExitClicked" BackgroundColor="#00C5C8"/>
         </StackLayout>
     </Grid>
 </ContentPage>
