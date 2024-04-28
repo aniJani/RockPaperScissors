@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RockPaperScissors.Pages.Game"
+             Title="Rock Paper Scissors">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <VerticalStackLayout Grid.Row="0" Spacing="20" HorizontalOptions="Center" VerticalOptions="Center">
+            <Label x:Name="ResultLabel" FontSize="24" HorizontalOptions="Center" />
+            <StackLayout Orientation="Horizontal" Spacing="20">
+                <Label x:Name="PlayerChoiceLabel" FontSize="48" />
+                <Label Text="VS" FontSize="48" />
+                <Label x:Name="ComputerChoiceLabel" FontSize="48" />
+            </StackLayout>
+        </VerticalStackLayout>
+
+        <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="Center" Spacing="20" Padding="20">
+            <Button x:Name="ScissorsButton" Text="✌️" FontSize="24" Clicked="OnButtonClicked" ClassId="Scissors" />
+            <Button x:Name="RockButton" Text="✊" FontSize="24" Clicked="OnButtonClicked" ClassId="Rock" />
+            <Button x:Name="PaperButton" Text="✋" FontSize="24" Clicked="OnButtonClicked" ClassId="Paper" />
+            <Button Text="Next Round" Clicked="OnNextRoundClicked" />
+            <Button Text="Exit" Clicked="OnExitClicked" />
+        </StackLayout>
+    </Grid>
+</ContentPage>
