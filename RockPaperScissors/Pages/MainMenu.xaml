@@ -31,7 +31,8 @@
                 FontSize="16"
                 Margin="10"
                 CornerRadius="5"
-                WidthRequest="200" HeightRequest="20"/>
+                WidthRequest="200" HeightRequest="20"
+                Clicked="OnExitClicked"/>
     </Grid>
 
 </ContentPage>

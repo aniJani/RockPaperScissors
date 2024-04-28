@@ -15,4 +15,9 @@ public partial class MainMenu : ContentPage
     {
         await Shell.Current.GoToAsync("//Statistics");
     }
+
+    async void OnExitClicked(object sender, EventArgs e)
+    {
+        App.Current.Quit();
+    }
 }
