@@ -11,10 +11,16 @@
 
         <VerticalStackLayout Grid.Row="0" Spacing="20" HorizontalOptions="Center" VerticalOptions="Center">
             <Label x:Name="ResultLabel" FontSize="24" HorizontalOptions="Center" />
-            <StackLayout Orientation="Horizontal" Spacing="20">
-                <Label x:Name="PlayerChoiceLabel" FontSize="48" />
-                <Label Text="VS" FontSize="48" />
-                <Label x:Name="ComputerChoiceLabel" FontSize="48" />
+            <StackLayout Orientation="Horizontal" Spacing="20" HorizontalOptions="Center">
+                <VerticalStackLayout>
+                    <Label Text="Player's Pick" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+                    <Label x:Name="PlayerChoiceLabel" FontSize="48" />
+                </VerticalStackLayout>
+                <Label Text="VS" FontSize="48" VerticalOptions="Center" />
+                <VerticalStackLayout>
+                    <Label Text="Computer's Pick" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+                    <Label x:Name="ComputerChoiceLabel" FontSize="48" />
+                </VerticalStackLayout>
             </StackLayout>
         </VerticalStackLayout>
 
